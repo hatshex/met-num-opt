@@ -40,8 +40,12 @@ Cálculo,	Álgebra	lineal,	Probabilidad	y	Estadística,	conocimiento de	programa
 8. Optimización	con	restricciones.
 9. Optimización	y	machine	learning
 
+## Evaluación:
+| Exámenes de Teoría        | Examen de C           | Tareas de C  | Proyecto Final  |
+| :-------------: |:-------------:| :-----:| :-----:|
+| 10,10,10 | 10 | 10 | 50 |
 
-## REFERENCIAS:
+## Referncias:
 1. [R.	L.	Burden,	J.	D.	Faires,	Numerical	Analysis,	Brooks/Cole	Cengage	Learning,	2005.]()
 2. [M.	T.	Heath,	Scientific	Computing.	An	Introductory	Survey,	McGraw-Hill,	2002.]()
 3. [P.	Pacheco,	An	Introduction	to	Parallel	Programming,	Morgan	Kaufmann,	2011.]()
