@@ -1,28 +1,22 @@
-# met-num-opt
-Clase de Métodos Numéricos y Optimización
-
-Profesor:
-Erick Palacios Moreno
-erick89.itam@gmail.com
-
-
 # Métodos Numéricos y Optimización
-### PROFESOR: ERICK PALACIOS MORENO
-### EMAIL: erick89.itam@gmail.com
-### URL: https://www.dropbox.com/sh/1s0dff6r1wadl4l/AAAsydFMYL-iNy5nX4V3kFCOa?dl=0
+* Profesor: 
+ - Erick Palacios Moreno
+* Correo
+ - erick89.itam@gmail.com
+* [Material del curso](https://www.dropbox.com/sh/1s0dff6r1wadl4l/AAAsydFMYL-iNy5nX4V3kFCOa?dl=0)
 
-## OBJETIVO:
+## Objetivo:
 Proporcionar	los	 fundamentos,	las	herramientas	y	conceptos	teóricos y	 prácticos	 para	 que	l@s	estudiantes	 desarrollen habilidades	en	álgebra	lineal	numérica,	cómputo	en	paralelo,	convexidad	y	optimización para	la comprensión	 y	 entendimiento	 del	 papel	 y	 la	 contínua	 investigación (conocimiento	 de	 frontera) del	 análisis y	 optimización	 numérica en	 big	
 data,	gran	escala,	inteligencia	artificial	y	machine	learning
 
-## DESCRIPCION:
+## Descripción:
 Los	 modelos	 o	 problemas	 de	 machine	 learning	 involucran	problemas	de	análisis	y	optimización	numérica,	en	el	curso	usaremos	esta	relación	para	estudiar	métodos	en	esta	rama	de	las	matemáticas	aplicadas	que	se	han	desarrollado	y	adaptado	para	resolverlos.	La	implementación de	dichos	métodos	en	la	computadora	es	crítico	al	ir	a	la	práctica,	por	lo	
 que	 se	 estudiarán	 aspectos	 de	 eficiencia	 en	 la	 implementación	 del	método,	tales	como,	el	número de	operaciones	en	punto	flotante,	acceso	y	transferencia	 de	 los	 datos	 en	 dos	 tipos	 de	 arquitectura	 computacional:	sistemas	 de	memoria	 compartida	 y	 sistemas	 de	memoria	 distribuida.	Se	utilizará	el	lenguaje	C	para	el	uso	de	recursos	en	estas	arquitecturas	y se	estudiarán	 las	 siguientes	 extensiones	 a	 este	 lenguaje:	 MPI,	 OpenMP,	Pthreads	y	CUDA.
 
-## PREREQUISITOS:
+## Pre Requisitos:
 Cálculo,	Álgebra	lineal,	Probabilidad	y	Estadística,	conocimiento de	programación	por	ejemplo	en	Matlab,	R	o	Python
 
-## TEMARIO:
+## Temario:
 1. Cómputo	científico.
   * Sistema	de	punto	flotante.
 2. Cómputo	en	paralelo.
