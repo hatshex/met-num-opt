@@ -63,3 +63,32 @@ printf("Variable double 3: %e\n", variable_double3);
 printf("Variable double 3 todos los decimales %1.5e\n", variable_double3);
 }
 ```
+
+## Máximo número
+```
+#include<stdio.h>
+#include<float.h>
+main()
+{
+printf("Número más grande positivo: %e\n", DBL_MAX);
+
+}
+```
+## UnderFlow, OverFlow
+```
+#include<stdio.h>
+#include<float.h>
+main()
+{
+
+//UnderFlow, OverFlow
+
+long double variable1=2.22e-326;
+long double variable2 = 1e309;
+
+printf("Valor de variable 1: %Le\n", variable1);
+printf("Valor de variable 2: %Le\n", variable2);
+
+}
+
+```
