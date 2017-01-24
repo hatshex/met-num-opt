@@ -34,7 +34,7 @@ Para ejecutar el programa
 ```
 
 
-## Otro ejemplo, inicializando variables y haciendo operaciones`
+## Inicializando variables
 ``` shell
 #include<stdio.h>
 main(){
@@ -93,7 +93,7 @@ printf("Valor de variable 2: %Le\n", variable2);
 
 ```
 
-## Epsilon de la máquina`
+## Epsilon de la máquina
 ``` shell
 #include<stdio.h>
 main()
