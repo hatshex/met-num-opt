@@ -1,17 +1,17 @@
 # Ubuntu
 
 ## Pre requisitos
-```
+``` shell
 $ sudo apt-get install build-essential
 $ sudo apt-get install libblas-dev
 $ sudo apt-get install nano
 ```
 Abrimos un editor de texto
-```
+``` shell
 nano ejemplo_hello_world.c
 ```
 Y tecleamos el siguiente código
-``` 
+``` shell
 /*ejemplo_hello_world.c*/
 #include<stdio.h>
 main(){
@@ -24,18 +24,18 @@ Otros comentarios, siempre ayudan a tu yo posterior
 ```
 
 Para compilar
-```
+``` shell
 gcc ejemplo_hello_world.c -o ejemplo_hello_world.out
 ```
 
 Para ejecutar el programa
-```
+``` shell
 ./ejemplo_hello_world.out
 ```
 
 
 ## Otro ejemplo, inicializando variables y haciendo operaciones`
-```
+``` shell
 #include<stdio.h>
 main(){
 
@@ -65,7 +65,7 @@ printf("Variable double 3 todos los decimales %1.5e\n", variable_double3);
 ```
 
 ## Máximo número
-```
+``` shell
 #include<stdio.h>
 #include<float.h>
 main()
@@ -75,7 +75,7 @@ printf("Número más grande positivo: %e\n", DBL_MAX);
 }
 ```
 ## UnderFlow, OverFlow
-```
+``` shell
 #include<stdio.h>
 #include<float.h>
 main()
@@ -91,4 +91,19 @@ printf("Valor de variable 2: %Le\n", variable2);
 
 }
 
+```
+
+## Epsilon de la máquina`
+``` shell
+#include<stdio.h>
+main()
+{
+
+double variable =1.0;
+while(1.0+variable !=1.0){
+variable = variable/2.0;
+}
+
+printf("Valor de epsilon de la máquina %e\n", variable);
+}
 ```
