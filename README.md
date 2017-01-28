@@ -57,3 +57,6 @@ Cálculo,	Álgebra	lineal,	Probabilidad	y	Estadística,	conocimiento de	programa
 9. [S.	P.	Boyd,	L.	Vandenberghe, Convex	Optimization.	Cambridge	University	Press,	2004.]()
 10. [J.	Nocedal,	S.	J.	Wright,	Numerical	Optimization.	Springer,	2006.]()
 11. [C.	M.	Bishop, Pattern	Recognition	and	Machine Learning.	Springer.	2008.]()
+
+## Ligas de interés:
+1. [Tutorial de C ](http://learn-c.org/)
