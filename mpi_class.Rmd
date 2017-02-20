@@ -156,7 +156,7 @@ Para compilar ejecutamos las siguientes instrucciones:
 ```
 $ mpicc hello_clase.c -o hello_clase.out
 ```
-Para ejecutar el programa
+Para ejecutar el programa y probarlo en un solo nodo
 ```
 mpi_user@master:/results$ mpiexec -n 3 hello_clase.out
 Hola del procesador 0 de 3!
@@ -164,7 +164,7 @@ Hola del procesador 1 de 3!
 Hola del procesador 2 de 3!
 ```
 
-Ahora si ejecutamos el programa
+Ahora si, ejecutamos el programa que utilizará los 2 nodos(master y nodo1)
 ```shell
 mpi_user@master:/results$ mpirun --prefix /opt/openmpi-2.0.2/ -n 2 -H master,nodo1 hello_clase.out 
 ```
