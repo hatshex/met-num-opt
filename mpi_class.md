@@ -1,9 +1,77 @@
-Crear los contenedores en la misma ruta
-```
-sudo docker run -dit -v $(pwd):/results -p 22 -h master --name master_container openmpi_mno_2017/openmpi:v1 /bin/bash
-sudo docker run -dit -v $(pwd):/results -p 22 -h nodo1 --name nodo1_container openmpi_mno_2017/openmpi:v1 /bin/bash
+Para la clase de mpi vamos a crear un directorio que se llame MPI, y dentro se debe colocar los archivos Dockerfile y el [openmpi-2.0.2.tar.gz](https://www.open-mpi.org/software/ompi/v2.0/openmpi-2.0.2.tar.gz)
 
+
+```
+$ sudo mkdir mpi
+$ cd mpi
+$ sudo nano Dockerfile
+```
+El archivo Dockerfile contiene lo siguiente:
+```
+FROM ubuntu:14.04
+
+RUN apt-get update -y && apt-get install -y build-essential \
+	nano \
+	man \
+	openssh-server
+
+RUN groupadd mpi_user
+
+RUN useradd mpi_user -g mpi_user -m -s /bin/bash
+
+ADD openmpi-2.0.2.tar.gz /opt/
+
+RUN cd /opt && chown -hR mpi_user:mpi_user openmpi-2.0.2
+
+RUN mkdir -p /var/run/sshd
+
+RUN echo "mpi_user ALL=(ALL:ALL) NOPASSWD:ALL" | (EDITOR="tee -a" visudo)
+
+RUN echo "mpi_user:mpi" | chpasswd
+
+USER mpi_user
+
+RUN cd /opt/openmpi-2.0.2 && ./configure --prefix=/opt/openmpi-2.0.2 -with-sge && make all install
+
+ENV PATH="/opt/openmpi-2.0.2/bin:$PATH"
+
+ENV LD_LIBRARY_PATH="/opt/openmpi-2.0.2/lib:LD_LIBRARY_PATH"
+```
+El directorio debe contener el archivo Dockerfile y el tar que descargamos.
+```
+$ ls
+$ Dockerfile  openmpi-2.0.2.tar.gz
+```
+Ahora tenemos que construir la imagen del contenedor, este proceso va a tardar varios minutos
+```
+$ sudo docker build -t openmpi_mno_2017/openmpi:v1 .
+```
+
+Una vez que termina el proceso, verificamos que la imagen esté disponible con el comando `docker images`
+```
+$sudo docker images
+[sudo] password for hatshex: 
+REPOSITORY                 TAG                 IMAGE ID            CREATED             SIZE
+openmpi_mno_2017/openmpi   v1                  a89db00a6867        9 days ago          649 MB
+```
+
+Una vez que ya tenemos la imagen, debemos crear 2 contenedores, uno llamado master y otro nodo1, cabe mencionar que se deben crear en la misma ruta.
+```
+$ sudo docker run -dit -v $(pwd):/results -p 22 -h master --name master_container openmpi_mno_2017/openmpi:v1 /bin/bash
+$ sudo docker run -dit -v $(pwd):/results -p 22 -h nodo1 --name nodo1_container openmpi_mno_2017/openmpi:v1 /bin/bash
+```
+
+Ya que están creados, necesitamos saber las IPs que se le asignó a cada docker, por lo que usamos el comando `docker inspect`
+```
 sudo docker inspect "iddocker" | grep IPA #Obtener IP del docker
+            "SecondaryIPAddresses": null,
+            "IPAddress": "172.17.0.2",
+                    "IPAMConfig": null,
+                    "IPAddress": "172.17.0.2",
+
+```
+En seguida debemos entrar a cada uno de los contenedores usando el comando `docker exec`
+```
 sudo docker exec -it "iddocker" /bin/bash #Entrar al docker
 ```
 
