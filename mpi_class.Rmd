@@ -1,4 +1,4 @@
-Para esta clase vamos a crear un directorio que se llame MPI, y dentro se debe colocar los archivos Dockerfile, openmpi-2.0.2.tar.gz [Descargar](https://www.open-mpi.org/software/ompi/v2.0/openmpi-2.0.2.tar.gz) y el programa hello_clase.out
+Para esta clase vamos a crear un directorio que se llame MPI, y dentro se debe colocar los archivos Dockerfile y openmpi-2.0.2.tar.gz [Descargar](https://www.open-mpi.org/software/ompi/v2.0/openmpi-2.0.2.tar.gz).
 
 
 ```shell
@@ -125,7 +125,7 @@ Creamos el programa
 $ sudo nano hello_clase.c
 ```
 El programa debe contener el siguiente código fuente
-```
+```shell
 #include<stdio.h>
 #include<string.h>
 #include<mpi.h>
