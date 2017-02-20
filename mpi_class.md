@@ -38,7 +38,7 @@ hello_clase.c  hello_clase.out
 ```
 Ahora si ejecutamos el programa
 ```
-mpirun --prefix /opt/openmpi-2.0.2/ -n 2 -H master,nodo1 hello_clase.out 
+mpi_user@master:/results$ mpirun --prefix /opt/openmpi-2.0.2/ -n 2 -H master,nodo1 hello_clase.out 
 ```
 
 El sistema se conecta por ssh al nodo1 y ejecuta el programa
@@ -50,5 +50,15 @@ Warning: Permanently added 'nodo1,172.17.0.3' (ECDSA) to the list of known hosts
 mpi_user@nodo1's password: 
 Hola del procesador 0 de 2!
 Hola del procesador 1 de 2!
-
+```
+Hacemos lo mismo para el nodo1
+```
+mpi_user@nodo1:/results$ mpirun --prefix /opt/openmpi-2.0.2/ -n 2 -H master,nodo1 hello_clase.out 
+The authenticity of host 'master (172.17.0.2)' can't be established.
+ECDSA key fingerprint is 80:b4:09:18:6e:00:fd:49:7d:94:a6:5d:4e:d9:10:0c.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'master,172.17.0.2' (ECDSA) to the list of known hosts.
+mpi_user@master's password: 
+Hola del procesador 0 de 2!
+Hola del procesador 1 de 2!
 ```
