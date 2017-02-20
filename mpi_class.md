@@ -1,13 +1,13 @@
 Para esta clase vamos a crear un directorio que se llame MPI, y dentro se debe colocar los archivos Dockerfile y openmpi-2.0.2.tar.gz [Descargar](https://www.open-mpi.org/software/ompi/v2.0/openmpi-2.0.2.tar.gz)
 
 
-```
+```shell
 $ sudo mkdir mpi
 $ cd mpi
 $ sudo nano Dockerfile
 ```
 El archivo Dockerfile contiene lo siguiente:
-```
+```shell
 FROM ubuntu:14.04
 
 RUN apt-get update -y && apt-get install -y build-essential \
@@ -38,18 +38,18 @@ ENV PATH="/opt/openmpi-2.0.2/bin:$PATH"
 ENV LD_LIBRARY_PATH="/opt/openmpi-2.0.2/lib:LD_LIBRARY_PATH"
 ```
 Dentro de la carpeta de mpi, tenemos los 2 archivos.
-```
+```shell
 $ ls
 $ Dockerfile  openmpi-2.0.2.tar.gz
 ```
 
 Ahora tenemos que construir la imagen del contenedor, este proceso va a tardar varios minutos
-```
+```shell
 $ sudo docker build -t openmpi_mno_2017/openmpi:v1 .
 ```
 
 Una vez que termina el proceso, verificamos que la imagen esté disponible con el comando `docker images`
-```
+```shell
 $sudo docker images
 [sudo] password for hatshex: 
 REPOSITORY                 TAG                 IMAGE ID            CREATED             SIZE
@@ -66,7 +66,7 @@ $ sudo docker run -dit -v $(pwd):/results -p 22 -h master --name master_containe
 $ sudo docker run -dit -v $(pwd):/results -p 22 -h nodo1 --name nodo1_container openmpi_mno_2017/openmpi:v1 /bin/bash
 ```
 Para verificar que se hayan creado usamos `docker ps -a`
-```
+```shell
 $ sudo docker ps -a
 
 CONTAINER ID        IMAGE                         COMMAND                  CREATED             STATUS                    PORTS                   NAMES
@@ -89,16 +89,16 @@ Ya que están creados, necesitamos saber las IPs que se le asignó a cada conten
 
 ```
 En seguida debemos entrar a cada uno de los contenedores usando el comando `docker exec`
-```
+```shell
 sudo docker exec -it c4b8ee392a2a /bin/bash #Entrar al docker
 ```
 
 Una vez que estamos dentro de los contenedores hay que agregar en el archivo /etc/hosts las ips respectivas para el nodo1 y el master
-```
+```shell
 sudo nano \etc\hosts
 ```
 Debe quedar algo así
-```
+```shell
 127.0.0.1       localhost
 ::1     localhost ip6-localhost ip6-loopback
 fe00::0 ip6-localnet
@@ -112,23 +112,23 @@ ff02::2 ip6-allrouters
 
 Y reiniciamos el servicio ssh en ambos contenedores ( master y nodo1)
 
-```
+```shell
 sudo service ssh restart
 ```
 
 En el nodo master hay que ir a la carpeta /results  y verificamos que el archivo hello_clase.out exista
-```
+```shell
 $ cd results/
 $ ls -al
 hello_clase.c  hello_clase.out
 ```
 Ahora si ejecutamos el programa
-```
+```shell
 mpi_user@master:/results$ mpirun --prefix /opt/openmpi-2.0.2/ -n 2 -H master,nodo1 hello_clase.out 
 ```
 
 El sistema se conecta por ssh al nodo1 y ejecuta el programa
-```
+```shell
 The authenticity of host 'nodo1 (172.17.0.3)' can't be established.
 ECDSA key fingerprint is 80:b4:09:18:6e:00:fd:49:7d:94:a6:5d:4e:d9:10:0c.
 Are you sure you want to continue connecting (yes/no)? yes
@@ -138,7 +138,7 @@ Hola del procesador 0 de 2!
 Hola del procesador 1 de 2!
 ```
 Hacemos lo mismo para el nodo1
-```
+```shell
 mpi_user@nodo1:/results$ mpirun --prefix /opt/openmpi-2.0.2/ -n 2 -H master,nodo1 hello_clase.out 
 The authenticity of host 'master (172.17.0.2)' can't be established.
 ECDSA key fingerprint is 80:b4:09:18:6e:00:fd:49:7d:94:a6:5d:4e:d9:10:0c.
