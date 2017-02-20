@@ -1,4 +1,4 @@
-Para esta clase vamos a crear un directorio que se llame MPI, y dentro se debe colocar los archivos Dockerfile y openmpi-2.0.2.tar.gz [Descargar](https://www.open-mpi.org/software/ompi/v2.0/openmpi-2.0.2.tar.gz)
+Para esta clase vamos a crear un directorio que se llame MPI, y dentro se debe colocar los archivos Dockerfile, openmpi-2.0.2.tar.gz [Descargar](https://www.open-mpi.org/software/ompi/v2.0/openmpi-2.0.2.tar.gz) y el programa hello_clase.out
 
 
 ```shell
@@ -42,6 +42,9 @@ Dentro de la carpeta de mpi, tenemos los 2 archivos.
 $ ls
 $ Dockerfile  openmpi-2.0.2.tar.gz
 ```
+
+
+
 
 Ahora tenemos que construir la imagen del contenedor, este proceso va a tardar varios minutos
 ```shell
@@ -115,13 +118,52 @@ Y reiniciamos el servicio ssh en ambos contenedores ( master y nodo1)
 ```shell
 sudo service ssh restart
 ```
+En el nodo master, nos movemos a la carpeta `results/` y creamos y compilamos el programa `hello_clase.c`
 
-En el nodo master hay que ir a la carpeta /results  y verificamos que el archivo hello_clase.out exista
-```shell
-$ cd results/
-$ ls -al
-hello_clase.c  hello_clase.out
+Creamos el programa
 ```
+$ sudo nano hello_clase.c
+```
+El programa debe contener el siguiente código fuente
+```
+#include<stdio.h>
+#include<string.h>
+#include<mpi.h>
+int main(){
+    int max_string=100;
+    char greeting[max_string];
+    int comm_sz;
+    int my_rank;
+    int q;
+    MPI_Init(NULL,NULL);
+    MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
+    MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
+    if(my_rank!=0){
+     sprintf(greeting, "Hola del procesador %d de %d!", my_rank, comm_sz);
+     MPI_Send(greeting, strlen(greeting)+1,MPI_CHAR,0,0,MPI_COMM_WORLD);    
+    }else{
+     printf("Hola del procesador %d de %d!\n", my_rank, comm_sz);
+     for(q=1;q<comm_sz;q++){
+      MPI_Recv(greeting, max_string, MPI_CHAR,q,0,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
+      printf("%s\n",greeting);
+     }
+    }
+    MPI_Finalize();
+}
+
+```
+Para compilar ejecutamos las siguientes instrucciones:
+```
+$ mpicc hello_clase.c -o hello_clase.out
+```
+Para ejecutar el programa
+```
+mpi_user@master:/results$ mpiexec -n 3 hello_clase.out
+Hola del procesador 0 de 3!
+Hola del procesador 1 de 3!
+Hola del procesador 2 de 3!
+```
+
 Ahora si ejecutamos el programa
 ```shell
 mpi_user@master:/results$ mpirun --prefix /opt/openmpi-2.0.2/ -n 2 -H master,nodo1 hello_clase.out 
